@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.DramaContentGenreViewMapper">
+
+    <select id="GenreList" parameterType="list" resultType="com.example.dto.ContentDrama_Genre_View" >
+        SELECT GENRE_CODE AS GENRECODE, COUNT(GENRE_CODE) AS CNT
+        FROM CONTENT_DRAMA_GENRE_VIEW
+        WHERE ID IN(
+            <foreach collection="list" item="obj" separator=", " >
+                #{obj}
+            </foreach>
+        )
+        GROUP BY GENRE_CODE ORDER BY CNT DESC
+    </select>
+
+</mapper>
